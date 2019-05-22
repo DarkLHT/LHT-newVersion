@@ -2,17 +2,11 @@
 $name       = @trim(stripslashes($_POST['name'])); 
 $from       = @trim(stripslashes($_POST['email'])); 
 $subject    = @trim(stripslashes($_POST['subject'])); 
-$message    = @trim(stripslashes($_POST['message'])); 
-$to   		= 'email@email.com';//replace with your email
+$message    = @trim(stripslashes($_POST['message']));
+$headers  = 'MIME-Version: 1.0' . "\n";
+$headers .= 'X-Mailer: PHP/' . phpversion() . "\n";
+$headers .= "From <$from>";
 
-$headers   = array();
-$headers[] = "MIME-Version: 1.0";
-$headers[] = "Content-type: text/plain; charset=iso-8859-1";
-$headers[] = "From: {$name} <{$from}>";
-$headers[] = "Reply-To: <{$from}>";
-$headers[] = "Subject: {$subject}";
-$headers[] = "X-Mailer: PHP/".phpversion();
-
-mail($to, $subject, $message, $headers);
+mail("contact@diaa.ma", $subject, $message, $headers);
 
 die;
